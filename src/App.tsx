@@ -1,13 +1,15 @@
-import { useEffect } from "react";
-import { useWeather } from "./contexts/Weather";
+import { useState } from "react";
 import Home from "./pages/home";
+import RequestLocation from "./components/RequestLocation";
 import { Global } from "./styles/GlobalStyles";
 
 function App() {
+  const [locationAvailable, setLocationAvailable] = useState(false);
+
   return (
     <div className="App">
       <Global />
-      <Home />
+      {locationAvailable ? <Home /> : <RequestLocation setLocationAvailable={setLocationAvailable} />}
     </div>
   );
 }

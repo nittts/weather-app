@@ -9,9 +9,13 @@ function Forecast() {
     <Container>
       <div className="day-weather">
         {weatherInfo &&
-          weatherInfo.forecast?.forecastday[0].hour.map((hour: any) => {
+          weatherInfo.forecast?.forecastday[0].hour.map((hour: any, index: number) => {
             return (
-              <HourCards hourTemp={hour.temp_c} maxTemp={weatherInfo.forecast?.forecastday[0].day.maxtemp_c}>
+              <HourCards
+                key={`${index}`}
+                hourTemp={hour.temp_c}
+                maxTemp={weatherInfo.forecast?.forecastday[0].day.maxtemp_c}
+              >
                 <h2>{hour.time.slice(-5)}</h2>
                 <p>{hour.temp_c}°</p>
                 <img src={hour.condition.icon} alt="" />
@@ -23,9 +27,9 @@ function Forecast() {
       <h1>NEXT THREE DAYS FORECAST</h1>
       <div className="forecast">
         {weatherInfo &&
-          weatherInfo.forecast?.forecastday.map((day: any) => {
+          weatherInfo.forecast?.forecastday.map((day: any, index: number) => {
             return (
-              <Card>
+              <Card key={`${index}`}>
                 <h2>{day.date.replace(/-/gi, "/")}</h2>
                 <img src={day.day.condition.icon} alt="" />
                 <p>{day.day.maxtemp_c}°</p>

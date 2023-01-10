@@ -18,7 +18,7 @@ const Container = styled.div<Props>`
         content: " ";
         z-index: -1;
         position: absolute;
-        width: 100%;
+        width: 100vw;
         height: 100%;
 
         background: ${dark
@@ -39,7 +39,7 @@ const Content = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
-  width: 90%;
+  width: 95%;
   min-height: auto;
 
   @media screen and (max-width: 900px) {

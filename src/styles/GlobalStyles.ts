@@ -18,9 +18,9 @@ const Global = createGlobalStyle<{ theme: Theme }>`
       }
 
       body {
-        width: 100vw;
         min-height: 100vh;
         background-color: ${theme.secondary};
+        overflow-x: hidden;
       }
 
       /* http://meyerweb.com/eric/tools/css/reset/ 

@@ -39,11 +39,12 @@ const Container = styled.div`
 
       @media screen and (max-width: 900px) {
         margin-top: 15%;
-        height: 100vh;
+        height: auto;
 
         .day-weather {
           justify-content: flex-start;
           overflow-x: scroll;
+          height: 50vh;
         }
 
         h1 {
@@ -51,8 +52,10 @@ const Container = styled.div`
         }
 
         .forecast {
-          margin-top: 25%;
+          margin-top: 5%;
           flex-flow: column nowrap;
+          justify-content: space-between;
+          height: 100vh;
         }
       }
     `;
@@ -94,7 +97,9 @@ const HourCards = styled.div<{ maxTemp: number; hourTemp: number }>`
       span {
         font-size: 0.6em;
         font-family: "Ubuntu", sans-serif;
-        color: ${theme.secondary};
+        color: ${theme.primary};
+        text-align: center;
+        margin: 10% 0;
       }
 
       ::before {
@@ -116,6 +121,11 @@ const HourCards = styled.div<{ maxTemp: number; hourTemp: number }>`
         height: 60%;
         border-left: 0.1em dashed ${theme.accentDark};
         display: block;
+      }
+
+      @media screen and (max-width: 900px) {
+        width: 50%;
+        padding: 0 1%;
       }
     `;
   }}

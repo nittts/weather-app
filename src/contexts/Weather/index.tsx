@@ -32,10 +32,6 @@ const WeatherProvider = ({ children }: IProviderProps) => {
     [weatherInfo]
   );
 
-  useEffect(() => {
-    fetchData("auto:ip");
-  }, []);
-
   return <WeatherContext.Provider value={{ weatherInfo, fetchData }}>{children}</WeatherContext.Provider>;
 };
 

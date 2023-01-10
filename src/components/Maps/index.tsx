@@ -1,11 +1,18 @@
 import { Container } from "./styles/maps";
 import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import { useWeather } from "../../contexts/Weather";
-import { useEffect, useState } from "react";
-import { LatLngTuple } from "leaflet";
+import { useState } from "react";
 
 function Maps() {
-  const [coords, setCoords] = useState([0, 0] as LatLngTuple);
+  const [coords, setCoords] = useState(() => {
+    const location = localStorage.getItem("@WeatherApp:location");
+
+    if (location) {
+      return JSON.parse(location);
+    }
+
+    return [0, 0];
+  });
   const [userInput, setUserInput] = useState("");
   const { weatherInfo, fetchData } = useWeather();
 
@@ -13,14 +20,6 @@ function Maps() {
     setCoords([0, 0]);
     fetchData(userInput);
   };
-
-  useEffect(() => {
-    if (weatherInfo && weatherInfo.location) {
-      if (coords.every((item) => item === 0)) {
-        setCoords([weatherInfo.location.lat, weatherInfo.location.lon]);
-      }
-    }
-  }, [weatherInfo, coords]);
 
   return (
     <Container>
@@ -42,7 +41,7 @@ function Maps() {
 
         <p>Name: {weatherInfo.location?.name}</p>
         <p>Country: {weatherInfo.location?.country}</p>
-        <p>Timezone: {weatherInfo.location?.tz_id}</p>
+        <p>Timezone: {weatherInfo.location?.tz_id.replace("_", " ")}</p>
 
         <label htmlFor="searchCity">
           <input
