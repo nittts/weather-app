@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const weatherAPI = axios.create({
-  baseURL: "http://api.weatherapi.com/v1",
+  baseURL: "https://api.weatherapi.com/v1",
   params: {
     key: import.meta.env.VITE_SECRET_KEY,
     days: 14,
