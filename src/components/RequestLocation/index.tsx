@@ -11,21 +11,20 @@ function RequestLocation({ setLocationAvailable }: IProps) {
   const setLocation = () => {
     let location = JSON.parse(localStorage.getItem("@WeatherApp:location") || "[]") || [];
 
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-      if (result.state === "granted") {
-        setLocationAvailable(true);
-      }
-
-      if (result.state === "prompt") {
-        navigator.geolocation.getCurrentPosition((result: GeolocationPosition) => {
+    navigator.permissions.query({ name: "geolocation" }).then((_) => {
+      navigator.geolocation.getCurrentPosition(
+        (result: GeolocationPosition) => {
           location = [result.coords.latitude, result.coords.longitude];
-
-          localStorage.setItem("@WeatherApp:location", JSON.stringify(location));
-        });
-      }
+        },
+        (err) => {
+          console.log(err);
+        },
+        { maximumAge: 60000, timeout: 1000, enableHighAccuracy: true }
+      );
     });
 
-    fetchData(location.join());
+    setLocationAvailable(true);
+    fetchData(location.join() || "auto:ip");
   };
 
   return (
